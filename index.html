@@ -189,7 +189,13 @@
 <section id="f4">
 <div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Part A results</p></div>
 <h2 class="title rise">The vectors beat chance and every fake vector on unseen topics</h2></div>
-<ul class="pts rise" style="--i:1;font-size:34px;"><li>Top-1 at block 23: 29% validation (49/168), 23% test (39/168). Chance is 7%; 95% of fake vectors score 12% or less.</li><li>The real vectors beat every fake at all 36 blocks (p = 0.002, the smallest possible with 500 shuffles).</li><li>Average AUROC is 0.80 on both validation and test.</li><li>Block 23 is a good choice: accuracy peaks at block 21 (32%), and 21 and 23 are within noise and tie on test.</li></ul>
+<div class="cols" style="grid-template-columns:760px 1fr; gap:52px;">
+<ul class="pts rise" style="--i:1;"><li>Top-1 at block 23: 29% validation (49/168), 23% test (39/168). Chance is 7%; 95% of fake vectors score 12% or less.</li><li>The real vectors beat every fake at all 36 blocks (p = 0.002, the smallest possible with 500 shuffles).</li><li>Average AUROC is 0.80 on both validation and test.</li><li>Block 23 is a good choice: accuracy peaks at block 21 (32%), and 21 and 23 are within noise and tie on test.</li></ul>
+<div class="fig zoom" style="--i:2">
+<img src="img/heldout_layer_accuracy.png" alt="Held-out accuracy at every block for Qwen3-8B and Qwen3-0.6B on all 336 held-out stories: 8B is 26% at block 23, 0.6B 24% at block 18, both well above the 7% chance line" style="width:100%; height:auto;">
+<p class="cap">Pooled check (Mohak): all 336 held-out stories, topics 14–19 together, so the numbers differ from the validation/test split. Accuracy at every block for Qwen3-8B and Qwen3-0.6B; dashed = chance (7%). 8B: 26.2% at block 23, best 27.7% at block 21.</p>
+</div>
+</div>
 <div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
 <aside>Flavia, slide 4 of 7.</aside>
 </section>

@@ -26,7 +26,7 @@ These slides are text-only until the figure arrives. Drop the PNG into `img/` an
 
 | Figure | Slide | Owner |
 | --- | --- | --- |
-| `v2_1_headline_real_vs_baselines.png` | 02 Validation, slide 4 (`f4`) | Flavia |
+| `v2_1_headline_real_vs_baselines.png` (replaces the pooled stand-in `img/heldout_layer_accuracy.png`) | 02 Validation, slide 4 (`f4`) | Flavia |
 | `v2_3_emotions_vs_fake_vectors.png` | 02 Validation, slide 5 (`f5`) | Flavia |
 | `B_heatmap.png` (pending) | 02 Validation, slide 6 (`f6`), beside paper Fig. 2 | Flavia |
 | `C_lines.png` (pending) | 02 Validation, slide 7 (`f7`), beside paper Fig. 3 | Flavia |
