@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speaker view · Emotion Concepts in Qwen3</title>
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  :root { --bg: #0B0E1C; --panel: #151A30; --line: #2A3166; --text: #F2F0EA; --soft: #C8CCF2; --muted: #8E94C4; --accent: #A7ACF2; --warm: #FFB08A; --notes: 30px; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', Arial, sans-serif; }
+  body { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+
+  header { display: flex; align-items: center; gap: 28px; padding: 14px 24px; border-bottom: 1px solid var(--line); font-size: 18px; color: var(--muted); }
+  header .count { color: var(--text); font-weight: 700; font-size: 22px; }
+  header .section { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  header .timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 26px; color: var(--accent); cursor: pointer; }
+  header .clock { font-variant-numeric: tabular-nums; }
+
+  main { display: grid; grid-template-columns: minmax(380px, 44%) 1fr; gap: 24px; padding: 20px 24px; min-height: 0; }
+  .left { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+  .label { font-size: 14px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted); }
+  .frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #000; }
+  .frame iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; }
+  .frame.small { width: 62%; }
+  .next-title { font-size: 18px; color: var(--soft); line-height: 1.35; }
+
+  .notes { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 30px; overflow-y: auto; font-size: var(--notes); line-height: 1.5; color: var(--text); }
+  .notes .title { font-size: 0.7em; font-weight: 600; color: var(--accent); margin-bottom: 14px; line-height: 1.3; }
+  .notes .body { white-space: pre-wrap; }
+  .notes .empty { color: var(--muted); font-style: italic; }
+
+  footer { position: fixed; right: 24px; bottom: 14px; font-size: 13px; color: var(--muted); }
+  .waiting { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); color: var(--muted); font-size: 20px; text-align: center; line-height: 1.6; }
+  .waiting[hidden] { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <span class="count" id="count">– / –</span>
+  <span class="section" id="section"></span>
+  <span class="timer" id="timer" title="Click to reset">00:00</span>
+  <span class="clock" id="clock"></span>
+</header>
+<main>
+  <div class="left">
+    <p class="label">Now</p>
+    <div class="frame"><iframe id="now" src="index.html?embed" title="Current slide"></iframe></div>
+    <p class="label">Next</p>
+    <div class="frame small"><iframe id="next" src="index.html?embed&still" title="Next slide"></iframe></div>
+    <p class="next-title" id="nextTitle"></p>
+  </div>
+  <div class="notes" id="notes"></div>
+</main>
+<footer>← → move · + − text size · click timer to reset</footer>
+<div class="waiting" id="waiting">Waiting for the slides…<br>Keep the main slides tab open, then press <b>S</b> there.</div>
+
+<script>
+(() => {
+  const channel = new BroadcastChannel('q1-deck');
+  const $ = id => document.getElementById(id);
+  const frames = { now: $('now'), next: $('next') };
+  let state = null;
+  let started = Date.now();
+  let size = 30;
+
+  function show(frame, index) {
+    const win = frames[frame].contentWindow;
+    const deck = win && win.deck;
+    if (!deck) return;
+    if (index >= deck.count) {
+      frames[frame].style.visibility = 'hidden';
+      return;
+    }
+    frames[frame].style.visibility = 'visible';
+    deck.go(index);
+  }
+
+  function render() {
+    if (!state) return;
+    $('waiting').hidden = true;
+    $('count').textContent = `${state.index + 1} / ${state.total}`;
+    $('section').textContent = state.now.section;
+    $('nextTitle').textContent = state.next ? state.next.title : 'End of deck';
+
+    const notes = $('notes');
+    notes.innerHTML = '';
+    const title = document.createElement('p');
+    title.className = 'title';
+    title.textContent = state.now.title;
+    const body = document.createElement('p');
+    body.className = state.now.notes ? 'body' : 'body empty';
+    body.textContent = state.now.notes || 'No notes for this slide.';
+    notes.append(title, body);
+    notes.scrollTop = 0;
+
+    show('now', state.index);
+    show('next', state.index + 1);
+  }
+
+  Object.values(frames).forEach(frame => frame.addEventListener('load', render));
+
+  channel.onmessage = ({ data }) => {
+    if (data.type !== 'state') return;
+    state = data;
+    render();
+  };
+  channel.postMessage({ type: 'hello' });
+
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter':
+        channel.postMessage({ type: 'step', by: 1 }); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace':
+        channel.postMessage({ type: 'step', by: -1 }); break;
+      case '+': case '=':
+        size = Math.min(48, size + 2); document.documentElement.style.setProperty('--notes', `${size}px`); break;
+      case '-': case '_':
+        size = Math.max(18, size - 2); document.documentElement.style.setProperty('--notes', `${size}px`); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  $('timer').addEventListener('click', () => { started = Date.now(); tick(); });
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    const s = Math.floor((Date.now() - started) / 1000);
+    $('timer').textContent = `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+    $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #0B0E1C; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body.idle { cursor: none; }
+h1, h2, h3, p, ul, ol, table { margin: 0; }
+img { display: block; }
+aside { display: none; }
+
+.deck {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  overflow: hidden;
+  user-select: none;
+}
+.deck > section { position: absolute; inset: 0; overflow: hidden; }
+.deck > section:not(.active):not(.leaving) { display: none; }
+.deck > section[data-skip] { display: none !important; }
+.deck > section.leaving { z-index: 0; pointer-events: none; }
+.deck > section.active { z-index: 1; animation: enter-fade 0.55s ease both; }
+.deck > section.active[data-transition="push"] { animation: enter-push 0.7s cubic-bezier(.2,.7,.2,1) both; }
+.deck[data-dir="back"] > section.active[data-transition="push"] { animation-name: enter-push-back; }
+
+@keyframes enter-fade { from { opacity: 0; } }
+@keyframes enter-push { from { opacity: 0; transform: translateX(90px); } }
+@keyframes enter-push-back { from { opacity: 0; transform: translateX(-90px); } }
+
+.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(167, 172, 242, 0.12); z-index: 10; }
+.progress-fill { height: 100%; width: 0; background: #7C80F0; transition: width 0.45s cubic-bezier(.2,.7,.2,1); }
+body.idle .progress { opacity: 0.35; }
+
+/* manim animations: a dark screen inside the figure card */
+video.screen { display: block; border-radius: 12px; background: #0D1318; object-fit: contain; }
+
+/* desperation | coherence pairs, in the chart colors */
+.dc { display: inline-flex; align-items: center; white-space: nowrap; font-weight: 600; }
+.dc .sep { width: 2px; align-self: stretch; margin: 0.14em 0.36em; border-radius: 1px; background: var(--line); }
+.dc .d, .dc-key .d { color: var(--violet); }
+.dc .c, .dc-key .c { color: var(--coral); }
+section.dark .dc .d, section.dark .dc-key .d { color: #A7ACF2; }
+section.dark .dc .c, section.dark .dc-key .c { color: #FFB08A; }
+section.dark .dc .sep { background: rgba(200, 204, 242, 0.3); }
+
+/* preview frames in the speaker view */
+.embed .progress { display: none; }
+.still *, .still *::before, .still *::after, .still .deck > section.active { animation: none !important; }

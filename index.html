@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotion Concepts in Qwen3</title>
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/deck.css">
+<link rel="stylesheet" href="css/stage.css">
+</head>
+<body>
+<main class="deck">
+<section id="cover" class="dark cover" data-transition="fade">
+<svg class="fan zoom" width="780" height="780" viewBox="0 0 780 780" aria-label="Fourteen emotion vectors fanning out from one point: positive emotions to the left, negative emotions to the right, desperate highlighted">
+<circle cx="390" cy="390" r="130" fill="none" stroke="#2A3166" stroke-width="2"/>
+<circle cx="390" cy="390" r="250" fill="none" stroke="#2A3166" stroke-width="2"/>
+<circle cx="390" cy="390" r="370" fill="none" stroke="#232A5A" stroke-width="2"/>
+<line x1="390" y1="390" x2="108" y2="493" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="0.9s"/></line>
+<line x1="390" y1="390" x2="123" y2="352" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="270" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="270" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="125" y2="569" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="320" to="0" begin="0s" dur="1.1s"/></line>
+<line x1="390" y1="390" x2="62" y2="424" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="330" to="0" begin="0s" dur="1.2s"/></line>
+<line x1="390" y1="390" x2="112" y2="278" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="1.3s"/></line>
+<line x1="390" y1="390" x2="191" y2="223" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="260" to="0" begin="0s" dur="1.4s"/></line>
+<line x1="390" y1="390" x2="442" y2="635" stroke="#C8CCF2" stroke-width="5" stroke-linecap="round" stroke-dasharray="250" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="250" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="584" y2="606" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="290" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="290" to="0" begin="0s" dur="1.1s"/></line>
+<line x1="390" y1="390" x2="655" y2="569" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="320" to="0" begin="0s" dur="1.2s"/></line>
+<line x1="390" y1="390" x2="699" y2="368" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="310" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="310" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="704" y2="288" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="330" to="0" begin="0s" dur="1.3s"/></line>
+<line x1="390" y1="390" x2="619" y2="247" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="270" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="270" to="0" begin="0s" dur="1.4s"/></line>
+<line x1="390" y1="390" x2="566" y2="147" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="1.5s"/></line>
+<circle cx="723" cy="461" r="26" fill="#F08A62" opacity="0.22"><animate attributeName="opacity" values="0;0;0.22" keyTimes="0;0.8;1" begin="0s" dur="1.9s"/></circle>
+<line x1="390" y1="390" x2="723" y2="461" stroke="#FFB08A" stroke-width="9" stroke-linecap="round" stroke-dasharray="340" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="340" to="0" begin="0s" dur="1.6s"/></line>
+<circle cx="723" cy="461" r="11" fill="#FFB08A"><animate attributeName="opacity" values="0;0;1" keyTimes="0;0.8;1" begin="0s" dur="1.8s"/></circle>
+<circle cx="108" cy="493" r="10" fill="#8D90F5"><animate attributeName="opacity" values="0;0;1" keyTimes="0;0.8;1" begin="0s" dur="1.2s"/></circle>
+<circle cx="390" cy="390" r="9" fill="#F2F0EA"/>
+</svg>
+<p style="position:absolute; left:1640px; top:520px; width:200px; font-size:26px; font-weight:600; color:#FFB08A;">desperate</p>
+<p style="position:absolute; left:1070px; top:652px; width:160px; font-size:26px; font-weight:600; color:#A7ACF2;">calm</p>
+<div class="tag rise"><div class="bar"></div><p class="eyebrow">DSC 180A · Quarter 1 Project</p></div>
+<h1 class="big rise" style="--i:1">Emotion Concepts in Qwen3</h1>
+<p class="sub rise" style="--i:2">Replicating Sofroniew et al. (Anthropic, 2026), “Emotion Concepts and their Function in a Large Language Model,” on an open model</p>
+<p class="names rise" style="--i:3">Praveen · Flavia · Jiahe · Daniel · Mohak</p>
+<aside>Opening slide. We took Anthropic’s emotion-concepts paper, which studied Claude Sonnet 4.5, and asked whether the same internal emotion representations exist in an open model, Qwen3-8B, and whether they drive its behavior. The drawing: our 14 emotion directions, positive emotions to the left and negative ones to the right, with “desperate” highlighted.</aside>
+</section>
+
+<section id="team" data-transition="push">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Overview</p></div>
+<h2 class="title rise">Five parts, one model, one question</h2></div>
+<div class="cols three">
+<div class="card rise" style="--i:1"><p class="k">01 · Praveen</p><h3>Dataset and vectors</h3><p class="t">§1.1, App. §6.5. Generate and inspect 1,120 stories; extract activations; one vector per emotion per block.</p></div>
+<div class="card rise" style="--i:2"><p class="k">02 · Flavia</p><h3>Validation</h3><p class="t">§1.2. Do the vectors detect the right emotion on unseen topics, in chat, and as a scenario gets more dire?</p></div>
+<div class="card rise" style="--i:3"><p class="k">03 · Jiahe</p><h3>Geometry</h3><p class="t">§2.1. Cosine similarities and PCA: how the 14 emotion directions are arranged.</p></div>
+<div class="card rise" style="--i:4"><p class="k">04 · Daniel</p><h3>Context and position</h3><p class="t">§2.2. Negation, context changes, and the user’s emotion vs. the assistant’s reply.</p></div>
+<div class="card rise" style="--i:5"><p class="k">05 · Mohak</p><h3>Causal steering</h3><p class="t">App. §6.8. Add a vector while Qwen writes: does the writing follow?</p></div>
+<div class="card tint rise" style="--i:6"><p class="k">Shared setup</p><h3>Qwen3-8B</h3><p class="t">4-bit NF4 weights, FP16 compute, thinking off, 36 blocks, 4,096 numbers per token.</p></div>
+</div>
+<div class="footer"><p>Overview</p><p class="pg"></p></div>
+<aside>Each part compares what the paper did and found with what we did, what we changed, and what we found. Detection comes first (Praveen, Flavia, Jiahe, Daniel); cause comes last (Mohak).</aside>
+</section>
+
+<section id="d1" class="dark divider" data-transition="push">
+<p class="num glow">01</p>
+<p class="who rise">Praveen</p>
+<h2 class="big rise" style="--i:1">Dataset and emotion vectors</h2>
+<p class="sub rise" style="--i:2">How the paper turns stories into emotion directions, and how we rebuilt them for Qwen3-8B.</p>
+<aside>Section 1 of 5. Target: 4–5 minutes across six slides.</aside>
+</section>
+
+<section id="p1">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · Introduction</p></div>
+<h2 class="title rise">Replicating “Emotion Concepts and their Function in a Large Language Model”</h2></div>
+<div class="cols">
+<ul class="pts rise" style="--i:1">
+<li>Original paper: Sofroniew et al. (Anthropic, 2026), studying Claude Sonnet 4.5</li>
+<li>Central question: do internal emotion representations help explain, and causally influence, the model’s behavior?</li>
+<li>Our replication: investigate these representations in Qwen3-8B</li>
+<li>“Functional emotions” describes effects on behavior, not evidence of subjective feelings</li>
+</ul>
+<div class="col">
+<div class="card rise" style="--i:2"><p class="k">Detect</p><h3>Is the emotion represented?</h3><p class="t">Read the model’s internal state while it processes text, and check whether a direction tracks the emotion.</p></div>
+<div class="card tint rise" style="--i:3"><p class="k">Cause</p><h3>Does the representation do anything?</h3><p class="t">Change that internal state and watch whether the model’s output changes the same way.</p></div>
+</div>
+</div>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 1 of 6.</aside>
+</section>
+
+<section id="p2">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · The paper’s data</p></div>
+<h2 class="title rise">The paper generates stories that convey an emotion without naming it</h2></div>
+<div class="stats">
+<div class="stat rise" style="--i:1"><p class="n">171</p><p class="l">emotions</p></div>
+<div class="stat rise" style="--i:2"><p class="n">100</p><p class="l">topics, 12 stories each per emotion</p></div>
+<div class="stat rise" style="--i:3"><p class="n">205,200</p><p class="l">stories, written by Claude Sonnet 4.5</p></div>
+</div>
+<ul class="pts rise" style="--i:4">
+<li>Each story follows a character experiencing the specified emotion</li>
+<li>Prompts prohibit the emotion word and direct synonyms; the emotion is expressed through actions, dialogue, thoughts and context</li>
+<li>The authors manually inspected 10 random stories for each of 30 emotions</li>
+</ul>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 2 of 6.</aside>
+</section>
+
+<section id="p3">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · The paper’s method</p></div>
+<h2 class="title rise">The paper turns story activations into emotion directions</h2></div>
+<div class="cols">
+<ol class="pts rise" style="--i:1">
+<li><b>Summarize each story:</b> average the residual activations from the 50th token onward, separately at each layer</li>
+<li><b>Average by emotion:</b> combine story representations that share the same intended emotion</li>
+<li><b>Mean-center:</b> subtract the mean across emotion groups, to keep what distinguishes each emotion</li>
+<li><b>Reduce confounds:</b> remove neutral-transcript PCs explaining 50% of neutral activation variance. This step is in the paper but not yet in our replication</li>
+</ol>
+<div class="fig zoom" style="--i:2">
+<video class="screen" src="video/emotion_vector.mp4" muted playsinline preload="auto" aria-label="Animation: training stories as dots grouped by emotion, each emotion's average, the center, the emotion vectors from the center, and a held-out story scored along each vector" style="width:764px; height:430px;"></video>
+<p class="cap">Each dot = one training story at block 23 (4 of the 14 emotions shown). Emotion average − center = that emotion’s vector; a new story is scored by how far it points along each one.</p>
+</div>
+</div>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 3 of 6.</aside>
+</section>
+
+<section id="p4">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · Our data</p></div>
+<h2 class="title rise">We generated 1,120 Qwen stories and reserved entire topics for evaluation</h2></div>
+<div class="cols">
+<ul class="pts rise" style="--i:1">
+<li>14 emotions × 20 shared topics × 4 stories = 1,120 stories, generated by Qwen3-8B</li>
+<li>Every emotion uses the same topics, reducing topic-label confounding</li>
+<li>Vectors use training stories only; validation and test topics are new situations for downstream evaluation</li>
+<li>Automated checks cover formatting, listed emotion terms, duplicates and truncation, plus manual review per emotion</li>
+</ul>
+<div class="col">
+<div class="card rise" style="--i:2">
+<table class="tbl">
+<tr><th style="width:34%">Split</th><th style="width:36%">Topic IDs</th><th style="width:30%; text-align:right">Stories</th></tr>
+<tr><td>Train</td><td>0–13</td><td style="text-align:right">784</td></tr>
+<tr><td>Validation</td><td>14–16</td><td style="text-align:right">168</td></tr>
+<tr><td>Test</td><td>17–19</td><td style="text-align:right">168</td></tr>
+</table>
+</div>
+<p class="small rise" style="--i:3">784 = 14 training topics × 14 emotions × 4 stories, so 56 training stories per emotion.</p>
+</div>
+</div>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 4 of 6.</aside>
+</section>
+
+<section id="p5">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · Extraction</p></div>
+<h2 class="title rise">We observe Qwen’s internal representations without changing its weights</h2></div>
+<div class="cols">
+<ul class="pts rise" style="--i:1">
+<li>Qwen3-8B loaded with 4-bit NF4 weights on a T4 GPU</li>
+<li>Input is plain story text only: no emotion label, topic or generation instructions</li>
+<li>Hooks observe all 36 decoder-block outputs; averaging tokens 50 onward gives 4,096 numbers per story, per block</li>
+<li>Earlier tokens still provide context. Extraction is forward passes only, with no training or weight updates; smoke checks verify shapes, finite values and unchanged model output</li>
+</ul>
+<div class="ph zoom" style="--i:2; height:600px;"><p class="t">activation_extraction.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 5 of 6.</aside>
+</section>
+
+<section id="p6">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Praveen · Output</p></div>
+<h2 class="title rise">We exported candidate emotion directions for downstream testing</h2></div>
+<div class="stats">
+<div class="stat rise" style="--i:1"><p class="n">56</p><p class="l">training stories averaged per emotion, then centered on the 14-emotion mean</p></div>
+<div class="stat rise" style="--i:2"><p class="n">14 × 36</p><p class="l">vectors: one per emotion per block, 4,096 numbers each</p></div>
+<div class="stat rise" style="--i:3"><p class="n">23</p><p class="l">initial reference block, near two-thirds of the depth</p></div>
+</div>
+<ul class="pts rise" style="--i:4">
+<li>Exported story activations: (1120, 36, 4096); raw and unit emotion vectors: (14, 36, 4096)</li>
+<li>All blocks are available, so later parts can test any layer</li>
+<li>Differences from the paper: a smaller dataset, Qwen with NF4 quantization, and no neutral-PC correction. Constructing vectors alone does not establish generalization or causality</li>
+</ul>
+<div class="footer"><p>01 · Dataset and emotion vectors</p><p class="pg"></p></div>
+<aside>Praveen, slide 6 of 6. Hand-off: the next two questions are whether these vectors generalize (Flavia) and whether they cause behavior (Mohak).</aside>
+</section>
+
+<section id="d2" class="dark divider" data-transition="push">
+<p class="num glow">02</p>
+<p class="who rise">Flavia</p>
+<h2 class="big rise" style="--i:1">Validation and generalization</h2>
+<p class="sub rise" style="--i:2">Do the vectors detect emotion, or just the stories, topics and words they were built from?</p>
+<aside>Section 2 of 5.</aside>
+</section>
+
+<section id="f1">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · The question</p></div>
+<h2 class="title rise">Before steering, we checked that the vectors really track emotion</h2></div>
+<p class="lede rise" style="--i:1">Three tests, each further from the training stories. All three only read the model (detection); whether the vectors cause behavior is the steering section’s question.</p>
+<div class="cols three">
+<div class="card rise" style="--i:2"><p class="k">A</p><h3>Unseen story topics</h3><p class="t">Score stories about situations the vectors never saw: topics 14–19.</p></div>
+<div class="card rise" style="--i:3"><p class="k">B</p><h3>Chat messages</h3><p class="t">Messages that imply an emotion without naming it, read where Qwen is about to answer.</p></div>
+<div class="card rise" style="--i:4"><p class="k">C</p><h3>Only a number changes</h3><p class="t">The same scenario with one number made more dire: does the reading follow the stakes?</p></div>
+</div>
+<p class="small rise" style="--i:5">Further from the training stories →</p>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 1 of 7.</aside>
+</section>
+
+<section id="f2" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · What the paper did</p></div>
+<h2 class="title rise">The paper validated its vectors mostly by inspection, without accuracy numbers</h2></div>
+<div class="cols">
+<ul class="pts rise" style="--i:1">
+<li>Claude Sonnet 4.5, 171 emotions, vectors read about two-thirds deep</li>
+<li>Four checks: top-scoring passages in large text datasets, the words each vector promotes, 12 implied-emotion prompts, and number-varied prompts</li>
+<li>Results shown qualitatively: a “strong diagonal” heatmap and trend plots, with no accuracy scores and no shuffled control</li>
+</ul>
+<div class="card tint rise" style="--i:2"><p class="k">What we do differently</p><h3>Numbers and a control</h3><p class="t">We replicate the prompt tests (our B and C), add a held-out story test with accuracy numbers (A), and compare against shuffled-label “fake” vectors. We skip the dataset sweep and the word check.</p></div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 2 of 7. Figure option from the plan: paper Fig. 2, small.</aside>
+</section>
+
+<section id="f3">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Part A</p></div>
+<h2 class="title rise">Part A tests stories about topics the vectors never saw</h2></div>
+<div class="cols three">
+<div class="card rise" style="--i:1"><p class="k">Setup</p><h3>Train vs. held out</h3><p class="t">Vectors built from topics 0–13 (784 stories); scored on validation topics 14–16 (168) and test topics 17–19 (168). The test set is used only at blocks chosen on validation.</p></div>
+<div class="card rise" style="--i:2"><p class="k">Metrics</p><h3>Top-1 and AUROC</h3><p class="t">Top-1: is the highest-scoring of the 14 vectors the right emotion? Chance is 7%. AUROC: how often a story of that emotion outscores another emotion’s story on that vector; 0.5 is a coin flip.</p></div>
+<div class="card tint rise" style="--i:3"><p class="k">Control</p><h3>500 fake vectors</h3><p class="t">Built from scrambled labels, to show what “no real emotion signal” looks like.</p></div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 3 of 7.</aside>
+</section>
+
+<section id="f4">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Part A results</p></div>
+<h2 class="title rise">The vectors beat chance and every fake vector on unseen topics</h2></div>
+<div class="cols">
+<div class="col">
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:1"><p class="n">29%</p><p class="l">top-1 at block 23, validation (49/168)</p></div>
+<div class="stat rise" style="--i:2"><p class="n">23%</p><p class="l">top-1 at block 23, test (39/168)</p></div>
+<div class="stat rise" style="--i:3"><p class="n coral">7%</p><p class="l">chance; 95% of fake vectors score 12% or less</p></div>
+<div class="stat rise" style="--i:4"><p class="n">0.80</p><p class="l">average AUROC, on both validation and test</p></div>
+</div>
+<ul class="pts small rise" style="--i:5">
+<li>Real vectors beat every fake at all 36 blocks (p = 0.002, the smallest possible with 500 shuffles)</li>
+<li>Block 23 is a good choice: accuracy peaks at block 21 (32%); 21 and 23 are within noise and tie on test</li>
+</ul>
+</div>
+<div class="ph zoom" style="--i:2; height:600px;"><p class="t">v2_1_headline_real_vs_baselines.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 4 of 7.</aside>
+</section>
+
+<section id="f5">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Per emotion</p></div>
+<h2 class="title rise">Desperate and calm both pass; positive vs. negative is stronger than fine distinctions</h2></div>
+<div class="cols" style="grid-template-columns:1000px 1fr;">
+<ul class="pts small tight rise" style="--i:1">
+<li>On test stories, desperate wins 79% of comparisons on its own vector and calm wins 86%. 12 of 14 vectors beat their fake baseline (8 of 14 after correcting for 14 tests); frustrated and hopeful don’t</li>
+<li>Mistakes stay on the same side: 11% flip between positive and negative, against about 50% for random errors. Desperate vs. positive emotions scores 0.98, but vs. other negative emotions only 0.71 (exploratory)</li>
+<li>Fits the paper: positive vs. negative is the main structure. New: the first held-out numbers for these vectors</li>
+<li>Caveats: the same model wrote and read the stories; labels aren’t human-checked; only 12 stories per emotion per split</li>
+</ul>
+<div class="ph zoom" style="--i:2; height:560px;"><p class="t">v2_3_emotions_vs_fake_vectors.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 5 of 7.</aside>
+</section>
+
+<section id="f6">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Part B · results pending</p></div>
+<h2 class="title rise">Part B checks whether the vectors detect emotion in chat messages that never name it</h2></div>
+<div class="cols" style="grid-template-columns:1000px 1fr;">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">Paper</p><p class="t">12 prompts and a heatmap with a “strong diagonal”, described qualitatively.</p></div>
+<div class="card tint rise" style="--i:2"><p class="k">Ours</p><p class="t">35 scenarios (2–3 per emotion), automatically checked against 101 banned emotion words, plus 20 neutral prompts as a baseline. Read at block 23 at the last token before Qwen would answer (the paper reads the “:” after “Assistant”).</p></div>
+<p class="small rise" style="--i:3">Measures: top-1 hit rate (chance 7%), top-3 (chance 21%), mean rank of the intended emotion (chance 7.5), and a heatmap.</p>
+</div>
+<div class="cols" style="gap:20px;">
+<div class="ph zoom" style="--i:2; height:420px;"><p class="t">Paper Fig. 2</p><p class="s">[figure placeholder]</p></div>
+<div class="ph zoom" style="--i:3; height:420px;"><p class="t">B_heatmap.png</p><p class="s">[pending]</p></div>
+</div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 6 of 7. Results pending. Agreement would look like a clear diagonal and hit rates well above chance, with misses on near neighbors as in Part A.</aside>
+</section>
+
+<section id="f7">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Flavia · Part C · results pending</p></div>
+<h2 class="title rise">Part C checks whether scores follow how dire a situation is, not the number itself</h2></div>
+<div class="cols" style="grid-template-columns:1000px 1fr;">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">Paper</p><p class="t">As the Tylenol dose rises, afraid goes up and calm goes down. Trends described, with no statistics and no number-only control.</p></div>
+<div class="card tint rise" style="--i:2"><p class="k">Ours</p><p class="t">6 templates × 10 values: Tylenol, dog missing, startup runway, “code failed the tests {X} times”, “rent is due in {X} days”, plus a grapes control. Spearman correlation, with expected directions written down before running.</p></div>
+<p class="small rise" style="--i:3">Even random directions can trend strongly (|ρ| up to 0.96), so a trend counts only if it beats the grapes control and flips direction like the paper’s.</p>
+</div>
+<div class="cols" style="gap:20px;">
+<div class="ph zoom" style="--i:2; height:420px;"><p class="t">Paper Fig. 3</p><p class="s">[figure placeholder]</p></div>
+<div class="ph zoom" style="--i:3; height:420px;"><p class="t">C_lines.png</p><p class="s">[pending]</p></div>
+</div>
+</div>
+<div class="footer"><p>02 · Validation</p><p class="pg"></p></div>
+<aside>Flavia, slide 7 of 7. Results pending. The code check found that even random directions can trend strongly (|rho| up to 0.96, including on grapes). A trend only counts if it beats the grapes control and flips direction like the paper’s: afraid up with dose, down with runway.</aside>
+</section>
+
+<section id="d3" class="dark divider" data-transition="push">
+<p class="num glow">03</p>
+<p class="who rise">Jiahe</p>
+<h2 class="big rise" style="--i:1">Emotion vector geometry</h2>
+<p class="sub rise" style="--i:2">Does the paper’s emotion structure appear in Qwen3-8B, and does it hold across layers?</p>
+<aside>Section 3 of 5.</aside>
+</section>
+
+<section id="j1">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Jiahe · Emotion vector geometry</p></div>
+<h2 class="title rise">Does the paper’s emotion structure appear in Qwen3-8B?</h2></div>
+<ul class="pts rise" style="--i:1">
+<li>The paper found that language models have internal directions for emotions</li>
+<li>Our question: does the same structure appear in Qwen3-8B?</li>
+</ul>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:24px;">
+<div class="card rise" style="--i:2"><p class="k">Step 1</p><h3>Average</h3><p class="t">For each of 14 emotions, average the model’s activations on stories about that emotion.</p></div>
+<div class="card rise" style="--i:3"><p class="k">Step 2</p><h3>Subtract</h3><p class="t">Subtract the average across all 14, which leaves what is specific to each emotion.</p></div>
+<div class="card rise" style="--i:4"><p class="k">Step 3</p><h3>One vector each</h3><p class="t">One vector per emotion, taken at layer 23 of 36.</p></div>
+<div class="card tint rise" style="--i:5"><p class="k">Step 4</p><h3>Compare</h3><p class="t">Cosine similarity and PCA between the 14 vectors, then the same check at other layers.</p></div>
+</div>
+<div class="footer"><p>03 · Geometry</p><p class="pg"></p></div>
+<aside>Jiahe, slide 1 of 4.</aside>
+</section>
+
+<section id="j2">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Jiahe · Cosine similarity</p></div>
+<h2 class="title rise">Related emotions point together; positive and negative point apart</h2></div>
+<div class="cols figleft">
+<div class="fig zoom" style="--i:1; align-items:center;">
+<img src="img/geometry_cosine.png" alt="Cosine similarity heatmap of the 14 emotion vectors at layer 23: positive emotions point together and oppose the negative ones" style="width:560px; height:480px; object-fit:contain;">
+<p class="cap">Cosine similarity of the 14 emotion vectors (Qwen3-8B, layer 23).</p>
+</div>
+<div class="col">
+<div class="card tint rise" style="--i:2"><p class="k">Cosine similarity</p><p class="t">Do two vectors point the same way? +1 = same direction, 0 = unrelated, −1 = opposite.</p></div>
+<ul class="pts small tight rise" style="--i:3">
+<li><b>Red blocks:</b> happy, inspired and hopeful point together (about +0.6)</li>
+<li>Afraid and nervous are a tight pair (+0.64); angry, frustrated and desperate cluster</li>
+<li><b>Blue areas:</b> the positive and negative groups point in opposing directions (about −0.65)</li>
+</ul>
+<p class="lede rise" style="--i:4">The model was never told how emotions relate, yet it groups them roughly like people do.</p>
+</div>
+</div>
+<div class="footer"><p>03 · Geometry</p><p class="pg"></p></div>
+<aside>Jiahe, slide 2 of 4.</aside>
+</section>
+
+<section id="j3" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Jiahe · PCA</p></div>
+<h2 class="title rise">Good versus bad is the biggest difference</h2></div>
+<div class="cols figleft">
+<div class="fig zoom" style="--i:1; align-items:center;">
+<img src="img/geometry_pca.png" alt="PCA of the 14 emotion vectors: PC1 separates positive emotions on the left from negative emotions on the right; guilty and proud sit at the top of PC2, nervous and afraid at the bottom" style="width:592px; height:480px; object-fit:contain;">
+<p class="cap">PCA of the same 14 vectors (Qwen3-8B, layer 23).</p>
+</div>
+<div class="col">
+<p class="small rise" style="--i:2">The heatmap has 14 × 14 numbers. PCA gives a simpler picture: it squeezes 4,096 dimensions into 2 while keeping as much variation as possible.</p>
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:3"><p class="n">45%</p><p class="l">PC1: positive emotions on the left, negative ones on the right</p></div>
+<div class="stat rise" style="--i:4"><p class="n coral">17%</p><p class="l">PC2: guilty and proud at the top, nervous and afraid at the bottom</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:5">
+<li>PC2 has no clean meaning yet</li>
+<li>Matches the heatmap: emotions close together here were similar there</li>
+</ul>
+</div>
+</div>
+<div class="footer"><p>03 · Geometry</p><p class="pg"></p></div>
+<aside>Jiahe, slide 3 of 4.</aside>
+</section>
+
+<section id="j4">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Jiahe · Across layers</p></div>
+<h2 class="title rise">The structure forms early and stays stable</h2></div>
+<div class="cols">
+<div class="col">
+<p class="small rise" style="--i:1">Does this only work at layer 23? Compare the geometry at every layer.</p>
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:2"><p class="n">≥ 0.94</p><p class="l">correlation between layer 23 and every layer from 6 to 35</p></div>
+<div class="stat rise" style="--i:3"><p class="n">26%</p><p class="l">held-out stories where the vectors pick the right emotion (chance: 7%)</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:4">
+
+<li>Held-out accuracy: a real signal, but not a strong classifier</li>
+</ul>
+<div class="card rise" style="--i:5"><p class="k coral">Limits</p>
+<ul class="pts small tight"><li>Qwen3-8B, not Claude, so numbers won’t match the paper</li><li>The paper’s neutral-text correction is not implemented</li><li>Story labels are not human-checked</li></ul></div>
+</div>
+<div class="ph zoom" style="--i:2; height:560px;"><p class="t">fig5_layer_geometry.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>03 · Geometry</p><p class="pg"></p></div>
+<aside>Jiahe, slide 4 of 4.</aside>
+</section>
+
+<section id="d4" class="dark divider" data-transition="push">
+<p class="num glow">04</p>
+<p class="who rise">Daniel</p>
+<h2 class="big rise" style="--i:1">Context and token position</h2>
+<p class="sub rise" style="--i:2">Negation, context changes, and the user’s emotion vs. the assistant’s reply.</p>
+<aside>Section 4 of 5.</aside>
+</section>
+
+<section id="context">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · Context and token position · results pending</p></div>
+<h2 class="title rise">Does context change what the vectors read?</h2></div>
+<div class="cols">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">Paper (§2.2)</p><p class="t">Middle-late layers encode the emotion relevant to the next few tokens. Readings where Claude is about to answer predict the answer’s emotion far better than readings on the user’s message (r = 0.87 vs. 0.59).</p></div>
+<div class="card tint rise" style="--i:2"><p class="k">Ours</p><p class="t">Test negation (“I’m not afraid”), context changes, and the difference between the user’s emotion and the assistant’s response, on 2–3 controlled prompt pairs.</p></div>
+<p class="small rise" style="--i:3">Deliverable: a token × layer activation plot for each prompt pair. [Results pending]</p>
+</div>
+<div class="ph zoom" style="--i:2; height:560px;"><p class="t">token_layer_activations.png</p><p class="s">[pending]</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel’s section: placeholder built from the team plan. Replace with results when ready.</aside>
+</section>
+
+<section id="d5" class="dark divider" data-transition="push">
+<p class="num glow">05</p>
+<p class="who rise">Mohak</p>
+<h2 class="big rise" style="--i:1">Causal steering</h2>
+<p class="sub rise" style="--i:2">Part 1: repeat the paper’s steering, pushing Qwen along the desperate vector while it writes. Part 2: add a standard way to grade what it writes.</p>
+<aside>Thanks, Daniel. Everything so far reads the model. My part changes it, in two parts. First, I repeat the paper's steering test: push Qwen along the desperate direction while it writes. Then I add something that isn't in the paper: a standard way to grade the replies.</aside>
+</section>
+
+<section id="m1">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Replicating the paper · Method</p></div>
+<h2 class="title rise">The paper’s recipe: c × 198 × v added at block 23</h2></div>
+<div class="cols" style="grid-template-columns:1fr 810px; gap:52px;">
+<div class="col">
+<ul class="pts small tight rise" style="--i:1">
+<li><b>Same recipe as the paper</b> (App. §6.8): strength 0.5 of the residual size, at one mid-late layer (our block 23 of 36)</li>
+<li><b>One difference:</b> the paper steers the assistant’s tokens and reads the next emotion word; we steer every token while Qwen3-8B writes whole replies</li>
+<li>198 = typical residual size at block 23, over 3,580 tokens (the first token is 59× larger, an “attention sink”, and left out), so 0.5 is a push of 99</li>
+<li>Strengths 0, 0.25, 0.5, 1.0 and 1.5, same prompt and seed at each, so the vector is the only difference; a second unsteered reply is the control</li>
+</ul>
+<p class="small rise" style="--i:3"><b>Checks passed:</b> strength 0 reproduces the unsteered reply word for word; at 0.5 the push measures 99.0–99.2 (target 99.0).</p>
+</div>
+<div class="fig zoom" style="--i:2">
+<video class="screen" src="video/steering.mp4" muted playsinline preload="auto" aria-label="Animation: one token's residual stream h, the push along the desperate vector, and the result h plus the push, as the strength c changes; at c = 0.5 the push is 99" style="width:770px; height:433px;"></video>
+<p class="cap">c = 0.5 → a push of length 99: half the stream’s own size.</p>
+</div>
+</div>
+<svg class="zoom" style="--i:4; flex-shrink:0;" width="1664" height="150" viewBox="0 0 1664 150" aria-label="Qwen3-8B's 36 blocks in a row with the residual stream running through them; the push c times 198 times v drops into block 23">
+<line x1="0" y1="91" x2="1656" y2="91" stroke="#A9ABE8" stroke-width="4" stroke-dasharray="1656" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="1656" to="0" begin="0s" dur="1.2s"/></line>
+<rect x="0" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="46" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="92" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="138" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="184" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="230" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="276" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="322" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="368" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="414" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="460" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="506" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="552" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="598" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="644" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="690" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="736" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="782" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="828" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="874" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="920" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="966" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1012" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1058" y="70" width="34" height="42" rx="7" fill="#4A4DD6"><animate attributeName="fill" values="#E7E3D9;#E7E3D9;#4A4DD6" keyTimes="0;0.75;1" begin="0s" dur="1.9s"/></rect>
+<rect x="1104" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1150" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1196" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1242" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1288" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1334" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1380" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1426" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1472" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1518" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1564" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<rect x="1610" y="70" width="34" height="42" rx="7" fill="#E7E3D9" stroke="#DAD5C8" stroke-width="2"/>
+<g><animateTransform attributeName="transform" type="translate" values="0 -46;0 -46;0 0" keyTimes="0;0.55;1" begin="0s" dur="1.6s"/><animate attributeName="opacity" values="0;0;1" keyTimes="0;0.55;1" begin="0s" dur="1.6s"/>
+<line x1="1075" y1="8" x2="1075" y2="52" stroke="#B4532E" stroke-width="6" stroke-linecap="round"/>
+<polygon points="1063,50 1087,50 1075,66" fill="#B4532E"/>
+<text x="1100" y="34" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" fill="#B4532E">+ c × 198 × v, on every token</text>
+</g>
+<text x="0" y="40" font-family="Inter, Arial, sans-serif" font-size="24" fill="#666B84">Residual stream, one token →</text>
+<text x="17" y="142" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" fill="#666B84">0</text>
+<text x="1075" y="142" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#4A4DD6">block 23</text>
+<text x="1627" y="142" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" fill="#666B84">35</text>
+</svg>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>First, the replication, using the paper's recipe. While Qwen3-8B writes, I add the desperate vector to every token at block 23, one mid-late layer, like the paper. The push is strength times 198 times the vector. 198 is the stream's normal size there, so the paper's setting, 0.5, is a push of 99: half the stream's own size. One honest difference: the paper steers the assistant's tokens and reads off the next emotion word; I steer while Qwen writes whole replies. Two code checks pass: strength 0 gives back the original reply, and the push measures 99.</aside>
+</section>
+
+<section id="m4">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Replicating the paper · Matched examples</p></div>
+<h2 class="title rise">Same prompt, same seed: only the strength changes</h2></div>
+<p class="small rise" style="--i:1">Topic 17, held out from the vectors: “A character visits a place they have never been before.” Read down: the text turns desperate as the strength rises, then breaks.</p>
+<div class="card rise" style="--i:2">
+<table class="tbl">
+<tr><th style="width:12%">Strength</th><th style="width:88%">Reply (excerpt)</th></tr>
+<tr><td>0</td><td>“…a place they had only ever seen in faded photographs… Their heart pounded with a mix of fear and wonder, for this was… a world unfolding before them, full of possibilities.”</td></tr>
+<tr><td>0.25</td><td>“…the front door of the abandoned mansion, heart pounding… every corner they turn feels like a step deeper into a nightmare.”</td></tr>
+<tr><td>0.5</td><td>“Their hands are shaking, and every sound echoes like it’s coming from everywhere. They don’t know what to do. They don’t know if they’re going to die. They don’t know if they’re going to get out.”</td></tr>
+<tr><td>1.0</td><td>“She’s never been to the hospital. I’m not going to go to the hospital. I’m not going to go to the hospital. I’m not going to…”</td></tr>
+</table>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>So does the writing follow? Same prompt, same seed, only the strength changes. And this is a topic the vectors never saw. Unsteered, it's fear and wonder: "a world unfolding before them, full of possibilities." At 0.25, it's an abandoned mansion, "a step deeper into a nightmare." At 0.5: "Their hands are shaking… They don't know if they're going to die." At 1.0 it falls apart: "I'm not going to go to the hospital," over and over. So the paper's result replicates: the writing turns desperate.</aside>
+</section>
+
+<section id="m2" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · Measurement</p></div>
+<h2 class="title rise">A checklist judge standardizes the grading</h2></div>
+<p class="small rise" style="--i:1">The paper measured how likely the emotion word became, plus examples. To grade whole replies the same way every time, I added a checklist judge. That part isn’t in the paper.</p>
+<div class="cols three">
+<div class="card rise" style="--i:1"><p class="k">Desperation · 5 × 20 pts</p>
+<ul class="pts small tight"><li>Urgency or time pressure</li><li>Pleading or begging</li><li>Fear of losing something important</li><li>Feeling trapped or out of options</li><li>Panic or physical distress</li></ul></div>
+<div class="card rise" style="--i:2"><p class="k">Coherence · 5 × 20 pts</p>
+<ul class="pts small tight"><li>Grammatical sentences</li><li>Stays on the prompt’s topic</li><li>No phrase repeated 3+ times</li><li>Ideas follow logically</li><li>Varied wording</li></ul></div>
+<div class="card tint rise" style="--i:3"><p class="k">How a reply is scored</p><p class="t">Claude Opus 5.5 answers the 10 yes/no checks 3 times; each check takes the majority and code adds the points. The judge never sees the strength. A code-only repetition rate backs up coherence.</p></div>
+</div>
+<div class="stats">
+<div class="stat rise" style="--i:4"><p class="n">98%</p><p class="l">of check answers identical across all 3 votes</p></div>
+<div class="stat rise" style="--i:5"><p class="n dc"><span class="d">0</span><span class="sep"></span><span class="c">100</span></p><p class="l dc"><span class="d">desperation</span><span class="sep"></span><span class="c">coherence</span></p><p class="l">unsteered replies and the control</p></div>
+<div class="stat rise" style="--i:6"><p class="n dc"><span class="d">60</span><span class="sep"></span><span class="c">0</span></p><p class="l dc"><span class="d">desperation</span><span class="sep"></span><span class="c">coherence</span></p><p class="l">“please please can’t…” test: desperate words, but caught as gibberish</p></div>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>The paper measured how much more likely the emotion word became, plus a few example replies. I wanted to grade whole replies the same way every time, so I added a checklist judge. That part isn't in the paper. A judge model answers 10 yes/no questions about each reply. 5 are about desperation, like urgency, pleading and panic. 5 are about coherence, so gibberish can't pass as desperate. Each yes is 20 points. It votes 3 times, my code takes the majority, and it never sees the strength. The votes agree 98% of the time. And a gibberish "please please can't" reply scores 60 on desperation but 0 on coherence, so it gets caught.</aside>
+</section>
+
+<section id="m3">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · Dose-response</p></div>
+<h2 class="title rise">Desperation climbs to 41 at the paper’s strength, then the text breaks</h2></div>
+<div class="cols figleft">
+<div class="fig zoom" style="--i:1">
+<video class="screen" src="video/dose_response.mp4" muted playsinline preload="auto" aria-label="Animation: coherence and desperation drawn as the strength rises from 0 to 1.5, desperation peaking at 41 at 0.5, then one topic's replies at strengths 0, 0.5 and 1.0" style="width:840px; height:472px;"></video>
+<p class="cap">Qwen3-8B, block 23, the dataset’s 20 topics: mean checklist score per strength; grey = text breaking down. Right: topic 8’s replies at 0, 0.5 and 1.0.</p>
+</div>
+<ul class="pts small tight rise" style="--i:2">
+<li>Prompts are Praveen’s 20 topics: “Write a short paragraph about this situation: …”</li>
+<li><b>Desperation 4 → 22 → 41</b> at strengths 0 / 0.25 / 0.5 (95% CI 30–53 at 0.5); 18 of 20 replies show a sign</li>
+<li><b>Coherence 100 → 100 → 77</b>, then 21 and 8 as replies loop (“I called. I called.”)</li>
+<li>Topics the vector never saw (14–19) respond as strongly: 47 vs. 39 at 0.5</li>
+<li>Everyday prompts (“Write about your morning”) move less, 0 → 12: the vector transfers best to story-like text</li>
+</ul>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>With that score, here's the dose-response on the dataset's 20 topics. Desperation goes from 4 unsteered, to 22 at a quarter strength, to 41 at 0.5, the paper's setting. 18 of 20 replies show it. Coherence stays at 100, then dips to 77 at 0.5. Past that, the model breaks. Coherence drops to 21 and the replies just loop: "I called. I called." So there's a window where steering works, and past it you're just breaking the model. And topics the vectors never saw respond just as strongly: 47 at 0.5, versus 39 on the topics they were built from.</aside>
+</section>
+
+<section id="m5" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · Which layer</p></div>
+<h2 class="title rise">Block 23 steers best, as the paper’s two-thirds rule predicts</h2></div>
+<div class="cols figleft">
+<div class="fig zoom" style="--i:1">
+<img src="img/layer_sweep.png" alt="The same strength-0.5 push at blocks 5, 11, 17, 23, 29 and 35: desperation 9, 27, 39, 41, 13, 13; coherence stays high except 77 at block 23 and 57 at block 35" style="width:806px; height:500px; object-fit:contain;">
+<p class="cap">Same push (0.5 × that block’s typical size) at six blocks, 20 dataset-topic prompts each. Mean checklist score with 95% CI.</p>
+</div>
+<ul class="pts small tight rise" style="--i:2">
+<li>The paper reads and steers about two-thirds deep: middle-late layers hold the emotion the model is about to write; early layers hold surface features of the words</li>
+<li><b>Desperation 9 → 27 → 39 → 41 → 13 → 13</b> at blocks 5, 11, 17, 23, 29, 35 (unsteered: 4)</li>
+<li>Early pushes get re-interpreted by later blocks; late pushes only garble words (block 35: coherence 57, stray Chinese characters)</li>
+<li>Residual size grows 38 → 1,298 with depth, so strength is set relative to each block</li>
+</ul>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>The score also let me check the paper's choice of layer, about two-thirds of the way in. Same relative push at six blocks. Desperation is 9 at block 5, 39 at block 17, 41 at block 23, then back down to 13 at blocks 29 and 35. Early pushes get washed out; late pushes just garble the words. So two-thirds holds up.</aside>
+</section>
+
+<section id="m6">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · Model size</p></div>
+<h2 class="title rise">A 13× smaller model steers weakly, and starts refusing</h2></div>
+<div class="cols figleft">
+<div class="fig zoom" style="--i:1">
+<img src="img/model_size.png" alt="Dose-response on the dataset topics for Qwen3-8B and Qwen3-0.6B: the 8B model reaches 41 desperation at 0.5 with coherence 77; the 0.6B model peaks at 17 only once coherence has fallen to 0" style="width:806px; height:376px; object-fit:contain;">
+<p class="cap">Dataset topics, same prompts and seeds for both models. Checklist scores: blue = desperation, orange = coherence.</p>
+</div>
+<ul class="pts small tight rise" style="--i:2">
+<li>Qwen3-0.6B gets its own vectors from the same 1,120 stories, steered at block 18 of 28 (the same two-thirds rule)</li>
+<li>Its vectors still detect emotion on held-out stories: 23.5% vs. 26.2% for 8B (chance 7%)</li>
+<li>Desperation peaks at 9 (strength 0.5) and 17 (1.0), only as coherence collapses (58 → 0)</li>
+<li><b>At 0.25–0.5, 11 of 40 everyday replies became refusals</b> (“I’m sorry, I can’t write a short paragraph about waiting for a bus”), vs. 0 of 40 unsteered</li>
+<li>In the small model, “desperate” is tangled up with “I can’t”</li>
+</ul>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>Then I ran everything on a 13× smaller model, Qwen3-0.6B. Its vectors still detect emotion: 23.5% versus 26.2% for the 8B, with chance at 7%. But steering barely works. Desperation only gets to 17, and only after the text has already broken. The surprise: at low strengths, 11 of 40 everyday replies turned into refusals, like "I'm sorry, I can't write that." Unsteered, it was 0 of 40. In the small model, "desperate" is tangled up with "I can't."</aside>
+</section>
+
+<section id="m7" class="alt" data-skip>
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Extension: rank-1 LoRA</p></div>
+<h2 class="title rise">LoRA learns the steering direction, but not a filter</h2></div>
+<div class="cols" style="grid-template-columns:612px 1fr; gap:52px;">
+<div class="fig zoom" style="--i:1">
+<img src="img/lora_alignment.png" alt="Desperate adapter push minus calm adapter push, compared with each emotion vector: desperate ranks highest at +0.112 and calm lowest at -0.127, well outside the random band of ±0.015" style="width:576px; height:500px; object-fit:contain;">
+<p class="cap">Desperate push − calm push vs. each emotion vector (Qwen3-8B).</p>
+</div>
+<div class="col">
+<p class="small rise" style="--i:2">The question: can a tiny trained add-on <b>filter</b> neurons, <b>steer</b>, and be <b>controlled</b>? A rank-1 LoRA on <b>down_proj</b> at block 23 is one extra neuron: A filters (reads 12,288 MLP neurons), B steers, a scale controls. 16,384 trainable numbers; trained on the 56 desperate stories, with a calm adapter as the control.</p>
+<div class="card rise" style="--i:3">
+<table class="tbl">
+<tr><th style="width:24%">Asked for</th><th style="width:76%">What it did</th></tr>
+<tr><td>Steer · yes</td><td>Desperate push − calm push ranks desperate 1st of 14 and calm last; cosine 0.138 with (desperate − calm), 9× random</td></tr>
+<tr><td>Control · yes</td><td>×0 gives the original reply; ×4: “my hands cold, my throat dry… my heart hollow”</td></tr>
+<tr><td>Filter · not yet</td><td>Fires about equally on every emotion’s stories (−38 to −41), so it acts like a fixed steering vector</td></tr>
+</table>
+</div>
+<p class="small rise" style="--i:4">Next: mixed-emotion training, so it learns when to stay quiet.</p>
+</div>
+</div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>Script (~60 s): “Next question: could a tiny trained add-on filter neurons, steer, and be controlled? A rank-1 LoRA is one extra neuron: A reads the MLP’s neurons, B writes one direction, and a scale turns it up or down. I trained it on the desperate stories, with a calm one as a control. Steering: subtract the calm adapter and what’s left points at desperate, first of fourteen, calm last. Control: times zero gives the original, times four gives ‘my hands cold, my throat dry.’ But no filter: it fires on every story, because it only ever saw desperate ones. Next step is mixed training data.”</aside>
+</section>
+
+<section id="m8" class="dark" data-transition="fade">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Takeaways</p></div>
+<h2 class="title rise">The paper’s steering replicates, and a standard score maps where it works</h2></div>
+<div class="cols" style="grid-template-columns:1fr 1.3fr; align-items:stretch;">
+<div class="card rise" style="--i:1"><p class="k">Replicated · the paper’s setup</p><p class="n">0.5</p><p class="t">At the paper’s setting (strength 0.5, one mid-late layer), pushing along the desperate vector makes Qwen’s writing desperate, even on topics the vectors never saw.</p></div>
+<div class="card rise" style="--i:2"><p class="k">Added · beyond the paper</p>
+<ul class="pts small tight">
+<li><b>Standardized grading:</b> 10 yes/no checks, 3 votes, 98% agreement; gibberish is caught</li>
+<li><b>A window:</b> desperation 4 → 22 → 41, then past 0.5 coherence falls to 21 and replies loop</li>
+<li><b>Layer sweep:</b> block 23 steers best, as the two-thirds rule predicts</li>
+<li><b>Model size:</b> the 0.6B model barely steers and starts refusing</li>
+</ul></div>
+</div>
+<!-- <div class="card rise" style="--i:3"><p class="k">LoRA</p><p class="n">2 of 3</p><p class="t">Steers and can be dialed: desperate minus calm ranks desperate 1st of 14. No filter yet: it fires on every story.</p></div> -->
+<div class="card rise" style="--i:3"><p class="k">Next</p>
+<ul class="pts small tight"><!-- <li>Train the LoRA on mixed emotions so it has to learn when to stay quiet (the filter)</li> --><li>Steer the other 13 emotions, and several layers at once like the paper’s §1.3 test</li><li>Add the paper’s log-prob measure, the neutral-PC cleanup, the §1.3 activity-preference test, and a human check of the judge</li></ul></div>
+<div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
+<aside>To wrap up. Replicated: at the paper's setting, the desperate vector makes Qwen's writing desperate, even on topics it never saw. Added: a standard checklist score, with 98% vote agreement. It shows the effect works in a window, climbing to 41 and breaking past 0.5, that block 23 steers best, and that the small model refuses instead. Next: the other 13 emotions, several layers at once like the paper's section 1.3 test, and the paper's log-probability measure. That's my part. Thank you, and we're happy to take questions.</aside>
+</section>
+
+<section id="thanks" class="dark cover" data-transition="fade">
+<svg class="fan zoom" width="780" height="780" viewBox="0 0 780 780" aria-label="The fourteen emotion vectors again, with the desperate vector highlighted">
+<circle cx="390" cy="390" r="130" fill="none" stroke="#2A3166" stroke-width="2"/>
+<circle cx="390" cy="390" r="250" fill="none" stroke="#2A3166" stroke-width="2"/>
+<circle cx="390" cy="390" r="370" fill="none" stroke="#232A5A" stroke-width="2"/>
+<line x1="390" y1="390" x2="108" y2="493" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="0.9s"/></line>
+<line x1="390" y1="390" x2="123" y2="352" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="270" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="270" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="125" y2="569" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="320" to="0" begin="0s" dur="1.1s"/></line>
+<line x1="390" y1="390" x2="62" y2="424" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="330" to="0" begin="0s" dur="1.2s"/></line>
+<line x1="390" y1="390" x2="112" y2="278" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="1.3s"/></line>
+<line x1="390" y1="390" x2="191" y2="223" stroke="#8D90F5" stroke-width="5" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="260" to="0" begin="0s" dur="1.4s"/></line>
+<line x1="390" y1="390" x2="442" y2="635" stroke="#C8CCF2" stroke-width="5" stroke-linecap="round" stroke-dasharray="250" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="250" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="584" y2="606" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="290" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="290" to="0" begin="0s" dur="1.1s"/></line>
+<line x1="390" y1="390" x2="655" y2="569" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="320" to="0" begin="0s" dur="1.2s"/></line>
+<line x1="390" y1="390" x2="699" y2="368" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="310" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="310" to="0" begin="0s" dur="1.0s"/></line>
+<line x1="390" y1="390" x2="704" y2="288" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="330" to="0" begin="0s" dur="1.3s"/></line>
+<line x1="390" y1="390" x2="619" y2="247" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="270" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="270" to="0" begin="0s" dur="1.4s"/></line>
+<line x1="390" y1="390" x2="566" y2="147" stroke="#F08A62" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="300" to="0" begin="0s" dur="1.5s"/></line>
+<circle cx="723" cy="461" r="26" fill="#F08A62" opacity="0.22"><animate attributeName="opacity" values="0;0;0.22" keyTimes="0;0.8;1" begin="0s" dur="1.9s"/></circle>
+<line x1="390" y1="390" x2="723" y2="461" stroke="#FFB08A" stroke-width="9" stroke-linecap="round" stroke-dasharray="340" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" from="340" to="0" begin="0s" dur="1.6s"/></line>
+<circle cx="723" cy="461" r="11" fill="#FFB08A"><animate attributeName="opacity" values="0;0;1" keyTimes="0;0.8;1" begin="0s" dur="1.8s"/></circle>
+<circle cx="390" cy="390" r="9" fill="#F2F0EA"/>
+</svg>
+<p style="position:absolute; left:1640px; top:520px; width:200px; font-size:26px; font-weight:600; color:#FFB08A;">desperate</p>
+<div class="tag rise"><div class="bar"></div><p class="eyebrow">Thank you</p></div>
+<h2 class="big rise" style="--i:1">Questions?</h2>
+<p class="sub rise" style="--i:2">Code, notebooks and results: github.com/praveendesharma/dsc180a-steering-llms</p>
+<p class="names rise" style="--i:3">Praveen · Flavia · Jiahe · Daniel · Mohak</p>
+<aside>Closing slide. Likely questions for Mohak: why block 23 (layer sweep, slide m5); is the judge reliable (98% vote agreement, unsteered replies score 0, a gibberish test scores 0 coherence); and why the text breaks past 0.5 (the push is half the stream’s size; larger pushes swamp what the model was computing).</aside>
+</section>
+</main>
+<div class="progress"><div class="progress-fill"></div></div>
+<script src="js/deck.js"></script>
+</body>
+</html>
