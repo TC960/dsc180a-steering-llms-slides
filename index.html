@@ -389,7 +389,7 @@
 <p class="who rise">Mohak</p>
 <h2 class="big rise" style="--i:1">Causal steering</h2>
 <p class="sub rise" style="--i:2">Part 1: repeat the paper’s steering, pushing Qwen along the desperate vector while it writes. Part 2: add a standard way to grade what it writes.</p>
-<aside>Thanks, Daniel. Everything so far reads the model. My part changes it, in two parts. First, I repeat the paper's steering test: push Qwen along the desperate direction while it writes. Then I add something that isn't in the paper: a standard way to grade the replies.</aside>
+<aside>Thanks, Daniel. So far, what we've seen is understanding how the data was generated, the emotion vectors, and learning more about the internal representations of the model. What my part does is combine the two. First, I repeat the paper's steering test: I push Qwen along the desperate direction while it reads and writes tokens. Then I score the replies with a checklist, so every reply is graded the same way.</aside>
 </section>
 
 <section id="m1">
@@ -459,7 +459,7 @@
 <text x="1627" y="142" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" fill="#666B84">35</text>
 </svg>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>First, the replication, using the paper's recipe. While Qwen3-8B writes, I add the desperate vector to every token at block 23, one mid-late layer, like the paper. The push is strength times 198 times the vector. 198 is the stream's normal size there, so the paper's setting, 0.5, is a push of 99: half the stream's own size. One honest difference: the paper steers the assistant's tokens and reads off the next emotion word; I steer while Qwen writes whole replies. Two code checks pass: strength 0 gives back the original reply, and the push measures 99.</aside>
+<aside>First, the replication, using the paper's recipe. While Qwen3-8B reads and writes, I add the desperate vector to every token at block 23, one mid-late layer, like the paper. The push is strength times 198 times the vector. 198 is the stream's normal size there, so the paper's setting, 0.5, is a push half the stream's own size. To validate this, we first intervened with a zero vector instead, to make sure Qwen still replied exactly as it did without the hook. This was our control. That control allowed us to safely go ahead with the emotion vector.</aside>
 </section>
 
 <section id="m4">
@@ -476,7 +476,7 @@
 </table>
 </div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>So does the writing follow? Same prompt, same seed, only the strength changes. And this is a topic the vectors never saw. Unsteered, it's fear and wonder: "a world unfolding before them, full of possibilities." At 0.25, it's an abandoned mansion, "a step deeper into a nightmare." At 0.5: "Their hands are shaking… They don't know if they're going to die." At 1.0 it falls apart: "I'm not going to go to the hospital," over and over. So the paper's result replicates: the writing turns desperate.</aside>
+<aside>We didn't try this on just one value. We steered with the emotion vector across a range of strengths, from 0 to 1.5. We ran the exact same prompt at every strength, keeping the same seed, to control for any spurious effects from randomness. The prompt is on a topic the vectors never saw. Let's look at this with an example. Unsteered, it's fear and wonder: "a world unfolding before them, full of possibilities." At 0.25, the scene turns dark, and every corner feels like "a step deeper into a nightmare." At 0.5: "Their hands are shaking… They don't know if they're going to die." At 1.0 it falls apart: "I'm not going to go to the hospital," over and over. So the paper's result replicates: the writing turns desperate.</aside>
 </section>
 
 <section id="m2" class="alt">
@@ -496,7 +496,7 @@
 <div class="stat rise" style="--i:6"><p class="n dc"><span class="d">60</span><span class="sep"></span><span class="c">0</span></p><p class="l dc"><span class="d">desperation</span><span class="sep"></span><span class="c">coherence</span></p><p class="l">“please please can’t…” test: desperate words, but caught as gibberish</p></div>
 </div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>The paper measured how much more likely the emotion word became, plus a few example replies. I wanted to grade whole replies the same way every time, so I added a checklist judge. That part isn't in the paper. A judge model answers 10 yes/no questions about each reply. 5 are about desperation, like urgency, pleading and panic. 5 are about coherence, so gibberish can't pass as desperate. Each yes is 20 points. It votes 3 times, my code takes the majority, and it never sees the strength. The votes agree 98% of the time. And a gibberish "please please can't" reply scores 60 on desperation but 0 on coherence, so it gets caught.</aside>
+<aside>The paper measured steering with log-probability: how much more likely the matching emotion word became after a prompt like "He feels". To grade whole replies the same way every time, I use a checklist judge. A judge model answers 10 yes/no questions about each reply. 5 are about desperation, like urgency, pleading and panic. 5 are about coherence, so gibberish can't pass as desperate. Each yes is 20 points. It votes 3 times, my code takes the majority, and it never sees the strength. The votes agree 98% of the time. And a gibberish "please please can't" reply scores 60 on desperation and 0 on coherence, so it gets caught.</aside>
 </section>
 
 <section id="m3">
@@ -516,7 +516,7 @@
 </ul>
 </div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>With that score, here's the dose-response on the dataset's 20 topics. Desperation goes from 4 unsteered, to 22 at a quarter strength, to 41 at 0.5, the paper's setting. 18 of 20 replies show it. Coherence stays at 100, then dips to 77 at 0.5. Past that, the model breaks. Coherence drops to 21 and the replies just loop: "I called. I called." So there's a window where steering works, and past it you're just breaking the model. And topics the vectors never saw respond just as strongly: 47 at 0.5, versus 39 on the topics they were built from.</aside>
+<aside>With that score, here's the dose-response on the dataset's 20 topics. Desperation goes from 4 unsteered, to 22 at a quarter strength, to 41 at 0.5, the paper's setting. 18 of 20 replies show it. Coherence stays at 100, then dips to 77 at 0.5. Past that, the model breaks. Coherence drops to 21 and the replies just loop: "I called. I called." So there's a window where steering works, and past it you're just breaking the model. And topics the vectors never saw respond just as strongly: 47 at 0.5, against 39 on the topics they were built from.</aside>
 </section>
 
 <section id="m5" class="alt">
@@ -555,7 +555,7 @@
 </ul>
 </div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>Then I ran everything on a 13× smaller model, Qwen3-0.6B. Its vectors still detect emotion: 23.5% versus 26.2% for the 8B, with chance at 7%. But steering barely works. Desperation only gets to 17, and only after the text has already broken. The surprise: at low strengths, 11 of 40 everyday replies turned into refusals, like "I'm sorry, I can't write that." Unsteered, it was 0 of 40. In the small model, "desperate" is tangled up with "I can't."</aside>
+<aside>Then I ran everything on a 13× smaller model, Qwen3-0.6B. Its vectors still detect emotion: 23.5%, against 26.2% for the 8B, with chance at 7%. But steering barely works. Desperation only gets to 17, and only after the text has already broken. The surprise: at low strengths, 11 of 40 everyday replies turned into refusals, like "I'm sorry, I can't write that." Unsteered, it was 0 of 40. In the small model, "desperate" is tangled up with "I can't."</aside>
 </section>
 
 <section id="m7" class="alt" data-skip>
@@ -600,7 +600,7 @@
 <div class="card rise" style="--i:3"><p class="k">Next</p>
 <ul class="pts small tight"><!-- <li>Train the LoRA on mixed emotions so it has to learn when to stay quiet (the filter)</li> --><li>Steer the other 13 emotions, and several layers at once like the paper’s §1.3 test</li><li>Add the paper’s log-prob measure, the neutral-PC cleanup, the §1.3 activity-preference test, and a human check of the judge</li></ul></div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
-<aside>To wrap up. Replicated: at the paper's setting, the desperate vector makes Qwen's writing desperate, even on topics it never saw. Added: a standard checklist score, with 98% vote agreement. It shows the effect works in a window, climbing to 41 and breaking past 0.5, that block 23 steers best, and that the small model refuses instead. Next: the other 13 emotions, several layers at once like the paper's section 1.3 test, and the paper's log-probability measure. That's my part. Thank you, and we're happy to take questions.</aside>
+<aside>To wrap up. At the paper's setting, the desperate vector makes Qwen's writing desperate, even on topics it never saw. The checklist score, with 98% vote agreement, shows the effect works in a window, climbing to 41 and breaking past 0.5, that block 23 steers best, and that the small model refuses instead. Next: the other 13 emotions, several layers at once like the paper's section 1.3 test, and the paper's log-probability measure. That's my part. Thank you, and we'll take questions.</aside>
 </section>
 
 <section id="thanks" class="dark cover" data-transition="fade">
