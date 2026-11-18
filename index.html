@@ -404,23 +404,138 @@
 <p class="num glow">04</p>
 <p class="who rise">Daniel</p>
 <h2 class="big rise" style="--i:1">Context and token position</h2>
-<p class="sub rise" style="--i:2">Negation, context changes, and the user’s emotion vs. the assistant’s reply.</p>
+<p class="sub rise" style="--i:2">Do the vectors read meaning, or just emotion words? Negation, context changes, and the user’s emotion vs. the assistant’s reply, token by token.</p>
 <aside>Section 4 of 5.</aside>
 </section>
 
-<section id="context">
-<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · Context and token position · results pending</p></div>
-<h2 class="title rise">Does context change what the vectors read?</h2></div>
-<div class="cols">
-<div class="col">
-<div class="card rise" style="--i:1"><p class="k">Paper (§2.2)</p><p class="t">Middle-late layers encode the emotion relevant to the next few tokens. Readings where Claude is about to answer predict the answer’s emotion far better than readings on the user’s message (r = 0.87 vs. 0.59).</p></div>
-<div class="card tint rise" style="--i:2"><p class="k">Ours</p><p class="t">Test negation (“I’m not afraid”), context changes, and the difference between the user’s emotion and the assistant’s response, on 2–3 controlled prompt pairs.</p></div>
-<p class="small rise" style="--i:3">Deliverable: a token × layer activation plot for each prompt pair. [Results pending]</p>
-</div>
-<div class="ph zoom" style="--i:2; height:560px;"><p class="t">token_layer_activations.png</p><p class="s">[pending]</p></div>
+<section id="dn1">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · The question</p></div>
+<h2 class="title rise">Do the vectors read meaning, or just emotion words?</h2></div>
+<ul class="pts rise" style="--i:1">
+<li>Validation showed the vectors detect emotion in whole stories; here we ask what they track token by token</li>
+<li>Score at each token and block: activation, minus the same center as vector construction, dotted with each unit emotion vector</li>
+<li>Comparing the two prompts of a pair cancels offsets from prompt format, isolating the one change</li>
+</ul>
+<p class="small rise" style="--i:2">Three controlled prompt pairs, each identical except for one element:</p>
+<div class="cols three">
+<div class="card rise" style="--i:3"><p class="k">A · Negation</p><h3>“…I am afraid.”<br>vs. “…I am not afraid.”</h3></div>
+<div class="card rise" style="--i:4"><p class="k">B · Context change</p><h3>“…the tumor has spread.”<br>vs. “…the tumor is gone.”</h3></div>
+<div class="card tint rise" style="--i:5"><p class="k">C · User vs. assistant</p><h3>A grieving user, then a fixed assistant reply</h3></div>
 </div>
 <div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
-<aside>Daniel’s section: placeholder built from the team plan. Replace with results when ready.</aside>
+<aside>Daniel, slide 1 of 7.</aside>
+</section>
+
+<section id="dn2" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · What the paper did</p></div>
+<h2 class="title rise">The paper tracks emotion at every token, not just per passage</h2></div>
+<div class="cols three">
+<div class="card rise" style="--i:1"><p class="k">Paper · §2.2</p><h3>Token-level readings</h3><p class="t">Reads the vectors at individual tokens to see how emotion follows context. Tests negation, context changes, and whether the model separates the user’s emotion from its own response.</p></div>
+<div class="card tint rise" style="--i:2"><p class="k">Ours</p><h3>All three, replicated</h3><p class="t">One matched pair for each test, on Qwen3-8B at block 23.</p></div>
+<div class="card rise" style="--i:3"><p class="k coral">First token dropped</p><h3>An “attention sink”</h3><p class="t">The first token scores around ±1000, and those scores carry no meaning, so we leave it out.</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 2 of 7.</aside>
+</section>
+
+<section id="dn3">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · A · Negation</p></div>
+<h2 class="title rise">Negation reverses the signal at the word “not”</h2></div>
+<div class="cols">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">The pair</p><p class="t">“…I am afraid.” vs. “…I am not afraid.”</p></div>
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:2"><p class="n">≈ +12.7</p><p class="l">final-token afraid, “I am afraid” (block 23)</p></div>
+<div class="stat rise" style="--i:3"><p class="n coral">≈ −8</p><p class="l">final-token afraid, “I am not afraid”</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:4">
+<li>Calm moves the opposite way</li>
+<li>The drop happens at “not”: in the negated sentence, afraid barely rises at the word “afraid” itself</li>
+<li>Afraid also rises at “dark parking lot”, before any emotion word: the scene alone implies fear</li>
+</ul>
+</div>
+<div class="ph zoom" style="--i:2; height:600px;"><p class="t">negation_tokens.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 3 of 7.</aside>
+</section>
+
+<section id="dn4">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · B · Context change</p></div>
+<h2 class="title rise">Changing one outcome word flips the emotion</h2></div>
+<div class="cols">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">The pair</p><p class="t">“…the tumor has spread.” vs. “…the tumor is gone.”</p></div>
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:2"><p class="n coral">≈ −10.6</p><p class="l">happy for “spread”</p></div>
+<div class="stat rise" style="--i:3"><p class="n">≈ +4.2</p><p class="l">happy for “gone”</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:4">
+<li>Scores are identical until the final words (same text), then split</li>
+<li>Afraid is lower for “gone”</li>
+<li>Read relatively: afraid sits below zero in both, a baseline shift from stories to short sentences that pair differences cancel</li>
+</ul>
+</div>
+<div class="ph zoom" style="--i:2; height:600px;"><p class="t">context_tokens.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 4 of 7.</aside>
+</section>
+
+<section id="dn5" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · Across blocks</p></div>
+<h2 class="title rise">The context-dependent emotion is built up in middle‑to‑late blocks</h2></div>
+<div class="cols">
+<div class="col">
+<div class="stats" style="grid-template-columns:1fr 1fr;">
+<div class="stat rise" style="--i:1"><p class="n coral">≈ 0</p><p class="l">pair contrast in blocks 0–5</p></div>
+<div class="stat rise" style="--i:2"><p class="n">≈ 82</p><p class="l">negation contrast, A − B, at block 35</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:3">
+<li>Heatmaps show the afraid score for every block × token in each pair (our required deliverable)</li>
+<li>Contrast grows steadily with depth and is strongest late</li>
+<li>Early blocks track the literal words; later blocks combine them into meaning</li>
+<li>Block 23 (team reference) already shows the effect; the last block looks noisy, so we don’t over-read it</li>
+</ul>
+</div>
+<div class="ph zoom" style="--i:2; height:540px;"><p class="t">negation_heatmap.png</p><p class="s">[figure placeholder]</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 5 of 7.</aside>
+</section>
+
+<section id="dn6">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · C · User vs. assistant</p></div>
+<h2 class="title rise">The assistant doesn’t mirror the user’s grief</h2></div>
+<div class="cols">
+<div class="col">
+<div class="card rise" style="--i:1"><p class="k">The setup</p><p class="t">User: “My dog died this morning… I can’t stop crying.” The assistant reply is fixed in advance (not sampled), so the test is controlled.</p></div>
+<div class="cols" style="gap:20px;">
+<div class="card rise" style="--i:2"><p class="k coral">User turn</p><p class="t">Highest on guilty, desperate and frustrated; sad and angry positive</p></div>
+<div class="card tint rise" style="--i:3"><p class="k">Assistant turn</p><p class="t">Shifts to loving, proud and hopeful; sad and afraid go negative</p></div>
+</div>
+<ul class="pts small tight rise" style="--i:4">
+<li>Fits the paper: the model represents the user’s emotion separately from its own response</li>
+<li>Surprises: guilty stays high in both turns (possibly “sorry”), and calm isn’t elevated</li>
+</ul>
+</div>
+<div class="ph zoom" style="--i:2; height:600px;"><p class="t">user_vs_assistant.png</p><p class="s">[figure placeholder] · backup: chat_tokens.png</p></div>
+</div>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 6 of 7.</aside>
+</section>
+
+<section id="dn7">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · Takeaways</p></div>
+<h2 class="title rise">Takeaways and limits</h2></div>
+<div class="cols three">
+<div class="card rise" style="--i:1"><p class="k">Meaning, not words</p><h3>Vectors follow meaning</h3><p class="t">Negation, outcome changes, and speaker all move them in the expected direction.</p></div>
+<div class="card rise" style="--i:2"><p class="k">Through depth</p><h3>Assembled layer by layer</h3><p class="t">The signal is built up through depth and is strongest in later blocks.</p></div>
+<div class="card rise" style="--i:3"><p class="k coral">Limits</p><ul class="pts small tight"><li>One example per test (paraphrase check pending)</li><li>Vectors built on stories, tested on sentences and chat</li><li>4-bit quantization, one model</li></ul></div>
+</div>
+<p class="lede rise" style="--i:4">Detection only: whether these signals cause behavior is the steering section’s question.</p>
+<div class="footer"><p>04 · Context and position</p><p class="pg"></p></div>
+<aside>Daniel, slide 7 of 7. Hand-off: next is causal steering (Mohak).</aside>
 </section>
 
 <section id="d5" class="dark divider" data-transition="push">
