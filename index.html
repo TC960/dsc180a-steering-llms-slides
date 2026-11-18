@@ -298,7 +298,7 @@
 </table>
 </div>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 1 of 7.</aside>
+<aside>Daniel, slide 1 of 8.</aside>
 </section>
 
 <section id="dn2" class="alt">
@@ -306,7 +306,7 @@
 <h2 class="title rise">The paper tracks emotion at every token, not just per passage</h2></div>
 <ul class="pts rise" style="--i:1;font-size:36px;"><li>Paper §2.2 reads vectors at individual tokens to see how emotion follows context</li><li>Tests negation, context changes, and whether the model separates the user’s emotion from its own response</li><li>We replicate all three with one matched pair each, on Qwen3-8B at block 23</li><li>We drop the first token: it acts as an “attention sink” with scores around ±1000 that carry no meaning</li></ul>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 2 of 7.</aside>
+<aside>Daniel, slide 2 of 8.</aside>
 </section>
 
 <section id="dn3">
@@ -319,7 +319,7 @@
 </div>
 </div>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 3 of 7.</aside>
+<aside>Daniel, slide 3 of 8.</aside>
 </section>
 
 <section id="dn4">
@@ -327,7 +327,7 @@
 <h2 class="title rise">Changing one outcome word flips the emotion</h2></div>
 <ul class="pts rise" style="--i:1;font-size:36px;"><li>“…the tumor has spread.” vs “…the tumor is gone.”</li><li>Scores are identical until the final words (same text), then split</li><li>happy ≈ −10.6 for “spread” vs ≈ +4.2 for “gone”; afraid is lower for “gone”</li><li>Read relatively: afraid sits below zero in both, a baseline shift from stories to short sentences that pair differences cancel</li></ul>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 4 of 7.</aside>
+<aside>Daniel, slide 4 of 8.</aside>
 </section>
 
 <section id="dn5" class="alt">
@@ -340,7 +340,7 @@
 </div>
 </div>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 5 of 7.</aside>
+<aside>Daniel, slide 5 of 8.</aside>
 </section>
 
 <section id="dn6">
@@ -353,7 +353,20 @@
 </div>
 </div>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 6 of 7.</aside>
+<aside>Daniel, slide 6 of 8.</aside>
+</section>
+
+<section id="dn-summary" class="alt">
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Daniel · Summary</p></div>
+<h2 class="title rise">Where the contrast emerges in depth</h2></div>
+<div class="cols" style="grid-template-columns:1fr 780px; gap:44px; align-items:start;">
+<ul class="pts small tight rise" style="--i:1; font-size:23px;"><li><b>Method:</b> matched prompt pairs differing in one element (§2.2); each token scored by projecting block activations onto the centered unit emotion vectors; first token excluded (attention-sink artifact).</li><li><b>Negation reverses the signal:</b> at block 23, final-token afraid ≈ 12.7 for “I am afraid” vs ≈ −8 for “I am not afraid”; the drop appears at “not”, not at “afraid”.</li><li><b>Context changes the signal:</b> in two sentences identical until the outcome, scores match until the final words, then diverge (happy ≈ −10.6 for “the tumor has spread” vs ≈ +4.2 for “the tumor is gone”).</li><li><b>Built up through depth:</b> contrast is near zero in blocks 0–5, grows steadily, and is strongest in late blocks (negation A − B ≈ 82 at block 35).</li><li><b>User vs assistant differ:</b> a grieving user’s turn scores highest on guilty, desperate, frustrated; the assistant’s reply shifts to loving, proud, hopeful, with negative sad and afraid.</li><li><b>Interpretation:</b> consistent with the paper — the model represents the user’s emotion separately from its own response.</li><li><b>Limitations:</b> single examples per test, story-to-chat format shift, 4-bit quantization.</li></ul>
+<div class="fig zoom" style="--i:2; align-items:center;">
+<img src="img/contrast_depth.png" alt="Where the contrast emerges in depth: A − B at the final token by block, for negation (afraid) and context (afraid); near zero through block 5, rising to about 82 for negation at block 35" style="width:740px; height:auto; object-fit:contain;">
+</div>
+</div>
+<div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
+<aside>Daniel, slide 7 of 8.</aside>
 </section>
 
 <section id="dn7">
@@ -361,7 +374,7 @@
 <h2 class="title rise">Takeaways and limits</h2></div>
 <ul class="pts rise" style="--i:1;font-size:36px;"><li>Vectors follow meaning: negation, outcome changes, and speaker all move them in the expected direction</li><li>Signal is assembled through depth, strongest in later blocks</li><li>Limits: one example per test (paraphrase check pending), vectors built on stories but tested on sentences and chat, 4-bit quantization, one model</li><li>Detection only; whether these signals cause behavior is the steering section’s question</li></ul>
 <div class="footer"><p>04 · Context and Token Position</p><p class="pg"></p></div>
-<aside>Daniel, slide 7 of 7.</aside>
+<aside>Daniel, slide 8 of 8.</aside>
 </section>
 
 <section id="d5" class="dark divider" data-transition="push">
