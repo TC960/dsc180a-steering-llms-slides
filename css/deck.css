@@ -104,3 +104,24 @@ section.dark .stat .n.coral, section.dark .card .n.coral { color: #FFB08A; }
 section.dark .stat .l, section.dark .small { color: var(--mist); }
 .card .n { font-family: 'Bricolage Grotesque', Arial, sans-serif; font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -2px; color: var(--violet); }
 .card .n.coral { color: var(--coral); }
+
+/* nested bullets, pending tag */
+.pts ul { list-style: circle; padding-left: 34px; margin: 8px 0 0; }
+.pts ul li { margin-bottom: 6px; }
+.pts.tight ul li { margin-bottom: 4px; }
+.title .pending { font-size: 0.55em; font-weight: 500; letter-spacing: 0; color: var(--muted); white-space: nowrap; }
+
+/* step row: A → B → C */
+.flow { display: flex; align-items: stretch; gap: 20px; }
+.flow .card { flex: 1; justify-content: center; }
+.flow .arrow { align-self: center; font-size: 44px; color: var(--muted); }
+
+/* overview index */
+.index { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; }
+.index li { display: grid; grid-template-columns: 110px 1fr auto; align-items: baseline; gap: 28px; padding: 22px 0; border-bottom: 2px solid var(--line); }
+.index li:first-child { border-top: 2px solid var(--line); }
+.index .no { font-family: 'Bricolage Grotesque', Arial, sans-serif; font-weight: 700; font-size: 44px; color: var(--violet); }
+.index .sec { font-family: 'Bricolage Grotesque', Arial, sans-serif; font-weight: 600; font-size: 44px; line-height: 1.1; color: var(--ink); }
+.index .who { font-size: 28px; font-weight: 500; color: var(--muted); }
+.setup { margin-top: auto; font-size: 24px; line-height: 1.5; color: var(--muted); }
+.setup b { font-weight: 600; color: var(--ink); }
