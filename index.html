@@ -241,7 +241,7 @@
 <p class="num glow">03</p>
 <p class="who rise">Jiahe</p>
 <h2 class="big rise" style="--i:1">Emotion Vector Geometry</h2>
-<aside>Section 3 of 5.</aside>
+<aside>Thanks, Flavia. (optional) Jiahe couldn't be here, so I'll walk through his part. So far, we've built the emotion vectors and checked that they pick up emotion in stories they never saw. Jiahe's part asks a different question: how are the 14 vectors arranged relative to each other?</aside>
 </section>
 
 <section id="j1">
@@ -249,7 +249,7 @@
 <h2 class="title rise">Emotion Vector Geometry</h2></div>
 <ul class="pts rise" style="--i:1;font-size:34px;"><li>The paper found that language models have internal directions for emotions</li><li>Our question: does the same structure appear in Qwen3-8B?</li><li>For each of 14 emotions, I averaged the model’s activations on stories about that emotion</li><li>Then I subtracted the average across all 14, which leaves what is specific to each emotion</li><li>Result: one vector per emotion, taken at layer 23 of 36</li><li>Then I compared the vectors with cosine similarity and PCA, and checked other layers</li></ul>
 <div class="footer"><p>03 · Emotion Vector Geometry</p><p class="pg"></p></div>
-<aside>Jiahe, slide 1 of 4.</aside>
+<aside>The paper found that language models have internal directions for emotions. Jiahe's question was: does the same structure show up in Qwen3-8B? For each of the 14 emotions, he averaged the model's activations on stories about that emotion. Then he subtracted the average across all 14. That leaves what's specific to each emotion. The result is one vector per emotion, taken at layer 23 of 36. Then he compared the vectors two ways, with cosine similarity and PCA, and checked other layers.</aside>
 </section>
 
 <section id="j2">
@@ -262,7 +262,7 @@
 <ul class="pts small rise" style="--i:2;"><li>Cosine similarity measures whether two vectors point the same way<ul><li>+1 = same direction, 0 = unrelated, −1 = opposite</li></ul></li><li>Red blocks: happy, inspired and hopeful point together (about +0.6)</li><li>Afraid and nervous are a tight pair (+0.64), and angry, frustrated and desperate cluster</li><li>Blue areas: the positive and negative groups point in opposing directions (about −0.65)</li><li>The model was never told how emotions relate, yet it groups them roughly like people do</li></ul>
 </div>
 <div class="footer"><p>03 · Emotion Vector Geometry</p><p class="pg"></p></div>
-<aside>Jiahe, slide 2 of 4.</aside>
+<aside>First, cosine similarity. It measures whether two vectors point the same way. Plus 1 is the same direction, 0 is unrelated, and minus 1 is opposite. This heatmap shows it for every pair of emotions. The red blocks are emotions that point together. Happy, inspired and hopeful sit at about +0.6. Afraid and nervous are a tight pair at +0.64, and angry, frustrated and desperate cluster too. The blue areas are where the positive and negative groups point in opposite directions, at about −0.65. The model was never told how emotions relate, yet it groups them roughly like people do.</aside>
 </section>
 
 <section id="j3" class="alt">
@@ -275,7 +275,7 @@
 <ul class="pts small rise" style="--i:2;"><li>The heatmap has 14 × 14 numbers, so PCA gives a simpler picture</li><li>PCA squeezes 4096 dimensions into 2 while keeping as much variation as possible</li><li>PC1 (45% of variance) separates positive emotions on the left from negative ones on the right<ul><li>So the biggest difference in the emotion space is good versus bad</li></ul></li><li>PC2 (17%): guilty and proud at the top, nervous and afraid at the bottom<ul><li>I can’t give it a clean meaning yet</li></ul></li><li>Matches the heatmap: emotions close together here were similar there</li></ul>
 </div>
 <div class="footer"><p>03 · Emotion Vector Geometry</p><p class="pg"></p></div>
-<aside>Jiahe, slide 3 of 4.</aside>
+<aside>The heatmap is 14 by 14 numbers, so PCA gives a simpler picture. It squeezes the 4,096 dimensions down to 2, while keeping as much of the variation as possible. The horizontal axis, PC1, explains 45% of the variance. Positive emotions are on the left and negative ones on the right. So the biggest difference in the emotion space is good versus bad. The vertical axis, PC2, explains 17%. Guilty and proud are at the top, nervous and afraid at the bottom. Jiahe doesn't have a clean meaning for it yet. And it matches the heatmap: emotions that sit close together here were similar there.</aside>
 </section>
 
 <section id="j4">
@@ -283,7 +283,7 @@
 <h2 class="title rise">Does It Hold Across Layers?</h2></div>
 <ul class="pts tight rise" style="--i:1;"><li><b>Question:</b> does this only work at layer 23?</li><li>I compared the geometry at every layer<ul><li>Layer 23 correlates 0.94 or higher with layers 6–35</li><li>So the structure forms early and stays stable</li></ul></li><li><b>Held-out stories:</b> the vectors pick the right emotion 26% of the time against 7% by chance<ul><li>Real signal, but not a strong classifier</li></ul></li><li><b>Limits:</b><ul><li>Qwen3-8B, not Claude, so numbers won’t match the paper</li><li>Paper’s neutral-text correction not implemented</li><li>Story labels not human-checked</li></ul></li></ul>
 <div class="footer"><p>03 · Emotion Vector Geometry</p><p class="pg"></p></div>
-<aside>Jiahe, slide 4 of 4.</aside>
+<aside>Last question: does this only work at layer 23? Jiahe compared the geometry at every layer. Layer 23 correlates 0.94 or higher with layers 6 through 35. So the structure forms early and stays stable. On held-out stories, the vectors pick the right emotion 26% of the time, against 7% by chance. That's a real signal, but not a strong classifier. A few limits. This is Qwen3-8B, not Claude, so the numbers won't match the paper. The paper's neutral-text correction isn't implemented yet. And the story labels weren't human-checked. Next, Daniel, on context and token position.</aside>
 </section>
 
 <section id="d4" class="dark divider" data-transition="push">
@@ -480,9 +480,9 @@
 </section>
 
 <section id="m2" class="alt">
-<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · Measurement</p></div>
-<h2 class="title rise">A checklist judge standardizes the grading</h2></div>
-<p class="small rise" style="--i:1">The paper measured how likely the emotion word became, plus examples. To grade whole replies the same way every time, I added a checklist judge. That part isn’t in the paper.</p>
+<div class="head"><div class="tag"><div class="bar"></div><p class="eyebrow">Mohak · Beyond the paper · My approach</p></div>
+<h2 class="title rise">My approach: an LLM-as-judge checklist grades every reply</h2></div>
+<p class="small rise" style="--i:1">The paper measured how likely the emotion word became, plus examples. To grade whole replies the same way every time, I added a checklist judge. That part isn’t in the paper.<br><b style="color:var(--ink);">Every score in the rest of my section comes from this checklist.</b></p>
 <div class="cols three">
 <div class="card rise" style="--i:1"><p class="k">Desperation · 5 × 20 pts</p>
 <ul class="pts small tight"><li>Urgency or time pressure</li><li>Pleading or begging</li><li>Fear of losing something important</li><li>Feeling trapped or out of options</li><li>Panic or physical distress</li></ul></div>
@@ -598,7 +598,8 @@
 </div>
 <!-- <div class="card rise" style="--i:3"><p class="k">LoRA</p><p class="n">2 of 3</p><p class="t">Steers and can be dialed: desperate minus calm ranks desperate 1st of 14. No filter yet: it fires on every story.</p></div> -->
 <div class="card rise" style="--i:3"><p class="k">Next</p>
-<ul class="pts small tight"><!-- <li>Train the LoRA on mixed emotions so it has to learn when to stay quiet (the filter)</li> --><li>Steer the other 13 emotions, and several layers at once like the paper’s §1.3 test</li><li>Add the paper’s log-prob measure, the neutral-PC cleanup, the §1.3 activity-preference test, and a human check of the judge</li></ul></div>
+<!-- <li>Train the LoRA on mixed emotions so it has to learn when to stay quiet (the filter)</li> -->
+<p class="t">Building on the team’s validation: steer the other emotions whose vectors pass validation (Parts B and C still pending), steer several layers at once like the paper’s §1.3, and add the paper’s log-probability measure.</p></div>
 <div class="footer"><p>05 · Causal steering</p><p class="pg"></p></div>
 <aside>To wrap up. At the paper's setting, the desperate vector makes Qwen's writing desperate, even on topics it never saw. The checklist score, with 98% vote agreement, shows the effect works in a window, climbing to 41 and breaking past 0.5, that block 23 steers best, and that the small model refuses instead. Next: the other 13 emotions, several layers at once like the paper's section 1.3 test, and the paper's log-probability measure. That's my part. Thank you, and we'll take questions.</aside>
 </section>
